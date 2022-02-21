@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "set NODE_ENV=developement && nodemon server.js",
-    "start": "set PORT=3000 && node server.js"
+    "start": "set PORT=3000 && set NODE_ENV=production && node server.js"
   },
   "author": "maxbrr",
   "license": "ISC",
