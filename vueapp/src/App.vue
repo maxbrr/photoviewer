@@ -1,28 +1,56 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>PHOTOzzz</h1>
+    <PhotoContainer :items="loaded" />
+    <button @click="fetchPage">more</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import PhotoContainer from './components/PhotoContainer.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PhotoContainer,
+  },
+  data: function() {
+    return {
+      page: 1,
+      loaded: []
+    }
+  },
+  methods: {
+    fetchPage: async function() {
+      const page = await fetch(`https://jsonplaceholder.typicode.com/photos?_page=${this.page}&_limit=9`);
+      const pageJSON = await page.json();
+      pageJSON.forEach(element => {
+        this.loaded.push(element);
+      });
+      this.page++;
+    }
+  },
+  mounted() {
+    this.fetchPage();
   }
 }
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: #333;
+  color: rgb(238, 238, 238);
+  width: 100vw;
+  height: 100vh;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 </style>
