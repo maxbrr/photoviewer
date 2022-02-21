@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>PHOTOzzz</h1>
+    <h1>PhotoViewer</h1>
     <PhotoContainer :items="loaded" />
     <button @click="fetchPage">more</button>
   </div>
